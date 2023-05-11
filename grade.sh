@@ -9,6 +9,31 @@ git clone $1 student-submission
 echo 'Finished cloning'
 
 
+path="student-submission/ListExamples.java";
+
+if [[ -f "$path" ]];
+then
+    echo "ListExamples.java found"
+else
+    echo "ListExamples.java not found"
+    exit
+fi
+
+to_path="grading-area"
+cp -r "$path" "TestListExamples.java" "lib" "$to_path"
+cd grading-area
+javac -cp $CPATH *.java
+
+if [[ $? = 1 ]]; 
+then
+    echo "cannot compile"
+    exit
+else
+    echo "compiled successfully"
+fi
+
+
+
 # Draw a picture/take notes on the directory structure that's set up after
 # getting to this point
 
